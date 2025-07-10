@@ -10,7 +10,7 @@
       --font-size-base: 16px;
       --font-size-title: 32px;
       --font-size-input: 16px;
-      --font-size-value: 16px; /* aumentada */
+      --font-size-value: 16px;
       --font-size-small: 10px;
       --font-weight-normal: 400;
       --font-weight-bold: 700;
@@ -112,16 +112,17 @@
       font-size: 12px;
       line-height: 1.3;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 550;
     }
     #valor {
-  font-weight: 1000; /* más grueso */
-  font-size: 13px; /* tamaño aumentado */
-  top: calc(236px * var(--escala));
-  right: calc(27px * var(--escala));
-  width: calc(280px * var(--escala));
-  text-align: right;
-  color: #a51c30;
+      font-weight: 900;
+      font-size: 13px;
+      top: calc(236px * var(--escala));
+      right: calc(27px * var(--escala));
+      width: calc(280px * var(--escala));
+      text-align: right;
+      color: #b11b4a;
+      font-family: 'Manrope', sans-serif;
     }
     #valor span.decimales-pequenos {
       font-size: var(--font-size-small);
@@ -145,173 +146,173 @@
   </style>
 </head>
 <body>
-<div class="formulario" id="pantalla">
-  <div class="titulo">NequiBotGV</div>
-  <button id="whatsapp" class="boton boton-whatsapp">¿No tienes clave? Contáctanos</button>
-  <button id="clave-ingreso" class="boton boton-clave">Ingresar Clave</button>
-  <button id="cambiar-clave-boton" class="boton boton-cambiar">Cambiar Clave</button>
-  <div id="contenido-oculto" style="display: none;">
-    <input type="text" id="input-nombre" class="input-campo" placeholder="Ej: Ana María López Ruiz">
-    <input type="text" id="input-valor" class="input-campo" placeholder="Ej: 125000">
-    <select id="formato" class="input-campo">
-      <option value="png">Formato: PNG</option>
-      <option value="jpg">Formato: JPG</option>
-    </select>
-    <button id="generar" class="boton boton-descargar">Generar Comprobante</button>
-    <div id="admin-panel" style="display: none;">
-      <input type="text" id="nueva-clave" class="input-campo" placeholder="Nueva clave de acceso">
-      <button id="guardar-nueva-clave" class="boton">Guardar Nueva Clave</button>
+  <div class="formulario" id="pantalla">
+    <div class="titulo">NequiBotGV</div>
+    <button id="whatsapp" class="boton boton-whatsapp">¿No tienes clave? Contáctanos</button>
+    <button id="clave-ingreso" class="boton boton-clave">Ingresar Clave</button>
+    <button id="cambiar-clave-boton" class="boton boton-cambiar">Cambiar Clave</button>
+    <div id="contenido-oculto" style="display: none;">
+      <input type="text" id="input-nombre" class="input-campo" placeholder="Ej: Ana María López Ruiz">
+      <input type="text" id="input-valor" class="input-campo" placeholder="Ej: 125000">
+      <select id="formato" class="input-campo">
+        <option value="png">Formato: PNG</option>
+        <option value="jpg">Formato: JPG</option>
+      </select>
+      <button id="generar" class="boton boton-descargar">Generar Comprobante</button>
+      <div id="admin-panel" style="display: none;">
+        <input type="text" id="nueva-clave" class="input-campo" placeholder="Nueva clave de acceso">
+        <button id="guardar-nueva-clave" class="boton">Guardar Nueva Clave</button>
+      </div>
     </div>
   </div>
-</div>
-<div class="container" id="captura">
-  <img src="comprobante_base.png" alt="Fondo" id="imagen-fondo">
-  <div id="nombre" class="input-overlay"></div>
-  <div id="valor" class="input-overlay"></div>
-</div>
-<button id="verPantallaCompleta">Ver en Pantalla Completa</button>
+  <div class="container" id="captura">
+    <img src="comprobante_base.png" alt="Fondo" id="imagen-fondo">
+    <div id="nombre" class="input-overlay"></div>
+    <div id="valor" class="input-overlay"></div>
+  </div>
+  <button id="verPantallaCompleta">Ver en Pantalla Completa</button>
 
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-<script>
-let claveAcceso = "32097221381";
-const claveAdmin = "1395";
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    let claveAcceso = "32097221381";
+    const claveAdmin = "1395";
 
-document.getElementById('whatsapp').onclick = () => {
-  window.open('https://wa.me/573178793834?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20la%20clave%20de%20NequiBotGV.', '_blank');
-};
+    document.getElementById('whatsapp').onclick = () => {
+      window.open('https://wa.me/573178793834?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20la%20clave%20de%20NequiBotGV.', '_blank');
+    };
 
-document.getElementById('clave-ingreso').onclick = () => {
-  const clave = prompt("Ingrese la clave de acceso:");
-  if (clave === claveAdmin) {
-    document.getElementById('admin-panel').style.display = 'block';
-    mostrarFormulario();
-  } else if (clave === claveAcceso) {
-    mostrarFormulario();
-  } else {
-    alert("Clave incorrecta. Acceso denegado.");
-  }
-};
+    document.getElementById('clave-ingreso').onclick = () => {
+      const clave = prompt("Ingrese la clave de acceso:");
+      if (clave === claveAdmin) {
+        document.getElementById('admin-panel').style.display = 'block';
+        mostrarFormulario();
+      } else if (clave === claveAcceso) {
+        mostrarFormulario();
+      } else {
+        alert("Clave incorrecta. Acceso denegado.");
+      }
+    };
 
-document.getElementById('cambiar-clave-boton').onclick = () => {
-  const clave = prompt("Ingrese la clave de administrador:");
-  if (clave === claveAdmin) {
-    document.getElementById('admin-panel').style.display = 'block';
-    mostrarFormulario();
-  } else {
-    alert("Clave de administrador incorrecta.");
-  }
-};
+    document.getElementById('cambiar-clave-boton').onclick = () => {
+      const clave = prompt("Ingrese la clave de administrador:");
+      if (clave === claveAdmin) {
+        document.getElementById('admin-panel').style.display = 'block';
+        mostrarFormulario();
+      } else {
+        alert("Clave de administrador incorrecta.");
+      }
+    };
 
-document.getElementById('guardar-nueva-clave').onclick = () => {
-  const nueva = document.getElementById('nueva-clave').value.trim();
-  if (nueva) {
-    claveAcceso = nueva;
-    alert("Clave de acceso actualizada exitosamente.");
-    document.getElementById('nueva-clave').value = "";
-  }
-};
+    document.getElementById('guardar-nueva-clave').onclick = () => {
+      const nueva = document.getElementById('nueva-clave').value.trim();
+      if (nueva) {
+        claveAcceso = nueva;
+        alert("Clave de acceso actualizada exitosamente.");
+        document.getElementById('nueva-clave').value = "";
+      }
+    };
 
-function mostrarFormulario() {
-  document.getElementById('contenido-oculto').style.display = 'block';
-  document.getElementById('whatsapp').style.display = 'none';
-  document.getElementById('clave-ingreso').style.display = 'none';
-  document.getElementById('cambiar-clave-boton').style.display = 'none';
-}
-
-document.getElementById('generar').onclick = () => {
-  if (!validarEntradas()) return;
-
-  const container = document.getElementById('captura');
-  const img = document.getElementById('imagen-fondo');
-  const escala = Math.min(window.innerWidth / 390, 1);
-  container.style.setProperty('--escala', escala);
-
-  document.getElementById('pantalla').style.display = 'none';
-  container.style.display = 'block';
-
-  document.getElementById('nombre').textContent = document.getElementById('input-nombre').value.toUpperCase();
-  document.getElementById('valor').innerHTML = formatValorConEstilo(document.getElementById('input-valor').value);
-
-  const formato = document.getElementById('formato').value;
-  if (!img.complete || !img.naturalWidth) {
-    alert("La imagen de fondo no se ha cargado completamente. Inténtalo nuevamente.");
-    return;
-  }
-
-  document.getElementById('verPantallaCompleta').style.display = 'block';
-
-  setTimeout(() => {
-    descargarComprobante(formato);
-  }, 1000);
-};
-
-function validarEntradas() {
-  const nombre = document.getElementById('input-nombre').value.trim();
-  const valor = document.getElementById('input-valor').value.trim();
-  if (!nombre || !valor) {
-    alert("Todos los campos son obligatorios.");
-    return false;
-  }
-  if (!/^\d+$/.test(valor.replace(/\./g, ''))) {
-    alert("El valor debe contener solo números.");
-    return false;
-  }
-  return true;
-}
-
-function formatValorConEstilo(valor) {
-  valor = valor.replace(/\D/g, '');
-  if (!valor) return "-$ 0,<span class='decimales-pequenos'>00</span>";
-  const numero = parseInt(valor);
-  const entero = numero.toLocaleString("es-CO");
-  return `-$ ${entero},<span class='decimales-pequenos'>00</span>`;
-}
-
-function descargarComprobante(formato) {
-  html2canvas(document.getElementById('captura'), {
-    scale: 4,
-    useCORS: true,
-    allowTaint: false,
-    scrollY: -window.scrollY,
-    scrollX: -window.scrollX
-  }).then(canvas => {
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL(`image/${formato}`);
-    link.download = `comprobante.${formato}`;
-    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      window.open(link.href, '_blank');
-    } else {
-      link.click();
+    function mostrarFormulario() {
+      document.getElementById('contenido-oculto').style.display = 'block';
+      document.getElementById('whatsapp').style.display = 'none';
+      document.getElementById('clave-ingreso').style.display = 'none';
+      document.getElementById('cambiar-clave-boton').style.display = 'none';
     }
-  }).catch(err => {
-    console.error("Error al capturar imagen:", err);
-    alert("Error al generar el comprobante. Intenta nuevamente.");
-  });
-}
 
-document.getElementById('verPantallaCompleta').onclick = () => {
-  const contenedor = document.getElementById('captura');
-  const btn = document.getElementById('verPantallaCompleta');
+    document.getElementById('generar').onclick = () => {
+      if (!validarEntradas()) return;
 
-  if (!document.fullscreenElement) {
-    contenedor.requestFullscreen?.();
-    const escala = Math.min(window.innerWidth / 390, 1);
-    contenedor.style.transform = `scale(${1 / escala})`;
-    btn.textContent = "Salir de Pantalla Completa";
-  } else {
-    document.exitFullscreen?.();
-    contenedor.style.transform = 'scale(1)';
-    btn.textContent = "Ver en Pantalla Completa";
-  }
-};
+      const container = document.getElementById('captura');
+      const img = document.getElementById('imagen-fondo');
+      const escala = Math.min(window.innerWidth / 390, 1);
+      container.style.setProperty('--escala', escala);
 
-document.addEventListener('fullscreenchange', () => {
-  const btn = document.getElementById('verPantallaCompleta');
-  if (!document.fullscreenElement) {
-    document.getElementById('captura').style.transform = 'scale(1)';
-    btn.textContent = "Ver en Pantalla Completa";
-  }
-});
-</script>
+      document.getElementById('pantalla').style.display = 'none';
+      container.style.display = 'block';
+
+      document.getElementById('nombre').textContent = document.getElementById('input-nombre').value.toUpperCase();
+      document.getElementById('valor').innerHTML = formatValorConEstilo(document.getElementById('input-valor').value);
+
+      const formato = document.getElementById('formato').value;
+      if (!img.complete || !img.naturalWidth) {
+        alert("La imagen de fondo no se ha cargado completamente. Inténtalo nuevamente.");
+        return;
+      }
+
+      document.getElementById('verPantallaCompleta').style.display = 'block';
+
+      setTimeout(() => {
+        descargarComprobante(formato);
+      }, 1000);
+    };
+
+    function validarEntradas() {
+      const nombre = document.getElementById('input-nombre').value.trim();
+      const valor = document.getElementById('input-valor').value.trim();
+      if (!nombre || !valor) {
+        alert("Todos los campos son obligatorios.");
+        return false;
+      }
+      if (!/^\d+$/.test(valor.replace(/\./g, ''))) {
+        alert("El valor debe contener solo números.");
+        return false;
+      }
+      return true;
+    }
+
+    function formatValorConEstilo(valor) {
+      valor = valor.replace(/\D/g, '');
+      if (!valor) return "-$ 0,<span class='decimales-pequenos'>00</span>";
+      const numero = parseInt(valor);
+      const entero = numero.toLocaleString("es-CO");
+      return `-$ ${entero},<span class='decimales-pequenos'>00</span>`;
+    }
+
+    function descargarComprobante(formato) {
+      html2canvas(document.getElementById('captura'), {
+        scale: 6,
+        useCORS: true,
+        allowTaint: false,
+        scrollY: -window.scrollY,
+        scrollX: -window.scrollX
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL(`image/${formato}`);
+        link.download = `comprobante.${formato}`;
+        if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          window.open(link.href, '_blank');
+        } else {
+          link.click();
+        }
+      }).catch(err => {
+        console.error("Error al capturar imagen:", err);
+        alert("Error al generar el comprobante. Intenta nuevamente.");
+      });
+    }
+
+    document.getElementById('verPantallaCompleta').onclick = () => {
+      const contenedor = document.getElementById('captura');
+      const btn = document.getElementById('verPantallaCompleta');
+
+      if (!document.fullscreenElement) {
+        contenedor.requestFullscreen?.();
+        const escala = Math.min(window.innerWidth / 390, 1);
+        contenedor.style.transform = `scale(${1 / escala})`;
+        btn.textContent = "Salir de Pantalla Completa";
+      } else {
+        document.exitFullscreen?.();
+        contenedor.style.transform = 'scale(1)';
+        btn.textContent = "Ver en Pantalla Completa";
+      }
+    };
+
+    document.addEventListener('fullscreenchange', () => {
+      const btn = document.getElementById('verPantallaCompleta');
+      if (!document.fullscreenElement) {
+        document.getElementById('captura').style.transform = 'scale(1)';
+        btn.textContent = "Ver en Pantalla Completa";
+      }
+    });
+  </script>
 </body>
 </html>
