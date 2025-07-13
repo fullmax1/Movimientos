@@ -1,85 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>NequiBotGV - Generador</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>NequiBotGV - Movimientos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --font-size-base: 16px;
-      --font-size-title: 32px;
+      --color-fondo: #0a0f1c;
+      --color-destello: #004466;
+      --color-claro: #fff;
+      --color-texto-input: #3C114B;
+      --color-sombra: rgba(0, 0, 0, 0.15);
       --font-size-input: 16px;
-      --font-size-value: 16px;
       --font-size-small: 10px;
-      --font-weight-normal: 400;
-      --font-weight-bold: 700;
-      --font-weight-extrabold: 900;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       padding: 0;
-      background: #000;
+      background: linear-gradient(135deg, var(--color-fondo), var(--color-destello));
       font-family: 'Manrope', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       flex-direction: column;
+      color: #fff;
     }
     .formulario {
-      background: #111;
+      background: var(--color-claro);
       padding: 40px 30px;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 128, 255, 0.4);
       width: 90%;
       max-width: 400px;
       text-align: center;
+      box-shadow: 0 10px 30px var(--color-sombra);
     }
     .titulo {
-      font-size: var(--font-size-title);
+      font-size: 32px;
       font-weight: 700;
-      background: linear-gradient(90deg, #0044cc, #00bfff);
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-      margin-bottom: 20px;
-      text-shadow: 0px 0px 15px rgba(0, 191, 255, 0.8);
+      color: var(--color-claro);
+      margin-bottom: 25px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 85, 170, 0.5);
     }
     .input-campo {
-      width: 90%;
-      padding: 14px;
+      width: 100%;
+      padding: 16px;
       margin: 12px 0;
-      border: 1px solid #444;
-      border-radius: 12px;
+      border: 1px solid #ccc;
+      border-radius: 14px;
       font-size: var(--font-size-input);
-      background: #222;
-      color: #fff;
-      font-family: 'Manrope', sans-serif;
+      background: #f9f9f9;
+      color: var(--color-texto-input);
+      font-weight: 500;
     }
     .boton {
-      margin-top: 10px;
-      padding: 14px;
-      width: 90%;
-      font-size: var(--font-size-base);
+      margin-top: 18px;
+      padding: 15px;
+      width: 100%;
+      font-size: 16px;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.4s ease;
+      background: linear-gradient(90deg, #004466, #006699);
       color: #fff;
     }
-    .boton:hover { opacity: 0.9; }
-    .boton-whatsapp { background: linear-gradient(90deg, #00c853, #00e676); }
-    .boton-clave { background: linear-gradient(90deg, #cc0000, #ff1744); }
-    .boton-cambiar { background: linear-gradient(90deg, #6a1b9a, #8e24aa); }
-    .boton-descargar { background: linear-gradient(90deg, #1976d2, #2196f3); }
     .container {
       position: relative;
       width: 100%;
       max-width: 390px;
-      margin: 20px auto;
+      margin: 0 auto;
       background: #fff;
       overflow: hidden;
       display: none;
@@ -94,25 +86,19 @@
       position: absolute;
       background: transparent;
       border: none;
-      font-size: var(--font-size-value);
-      color: #2E1A47;
-      font-weight: var(--font-weight-normal);
-      text-align: right;
-      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #3C114B;
+      text-align: left;
       pointer-events: none;
-      white-space: normal;
-      word-wrap: break-word;
-      overflow: visible;
     }
     #nombre {
       top: calc(227px * var(--escala));
       left: calc(61px * var(--escala));
       width: calc(340px * var(--escala));
-      text-align: left;
       font-size: 12px;
-      line-height: 1.3;
+      font-weight: 500;
       text-transform: uppercase;
-      font-weight: 550;
     }
     #valor {
       font-weight: 900;
@@ -122,128 +108,75 @@
       width: calc(280px * var(--escala));
       text-align: right;
       color: #b11b4a;
-      font-family: 'Manrope', sans-serif;
     }
     #valor span.decimales-pequenos {
       font-size: var(--font-size-small);
       vertical-align: baseline;
-    }
-    #verPantallaCompleta {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 12px 20px;
-      font-size: var(--font-size-base);
-      background: #1e88e5;
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      font-weight: bold;
-      z-index: 9999;
     }
   </style>
 </head>
 <body>
   <div class="formulario" id="pantalla">
     <div class="titulo">NequiBotGV</div>
-    <button id="whatsapp" class="boton boton-whatsapp">¿No tienes clave? Contáctanos</button>
-    <button id="clave-ingreso" class="boton boton-clave">Ingresar Clave</button>
-    <button id="cambiar-clave-boton" class="boton boton-cambiar">Cambiar Clave</button>
-    <div id="contenido-oculto" style="display: none;">
-      <input type="text" id="input-nombre" class="input-campo" placeholder="Ej: Ana María López Ruiz">
-      <input type="text" id="input-valor" class="input-campo" placeholder="Ej: 125000">
+    <button onclick="ingresarClave()" class="boton">Ingresar Clave</button>
+    <button onclick="window.open('https://wa.me/573178793834?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20la%20clave%20de%20NequiBotGV.', '_blank')" class="boton">¿No tienes clave? Escríbenos</button>
+    <div id="contenido-oculto" style="display:none">
+      <input type="text" id="input-nombre" class="input-campo" placeholder="Nombre completo">
+      <input type="text" id="input-valor" class="input-campo" placeholder="Monto en pesos">
       <select id="formato" class="input-campo">
         <option value="png">Formato: PNG</option>
         <option value="jpg">Formato: JPG</option>
       </select>
-      <button id="generar" class="boton boton-descargar">Generar Comprobante</button>
-      <div id="admin-panel" style="display: none;">
-        <input type="text" id="nueva-clave" class="input-campo" placeholder="Nueva clave de acceso">
-        <button id="guardar-nueva-clave" class="boton">Guardar Nueva Clave</button>
-      </div>
+      <button id="generar" class="boton">Generar Comprobante</button>
+      <input type="text" id="nueva-clave" class="input-campo" placeholder="Nueva clave de acceso" style="display:none">
+      <button id="guardar-nueva-clave" class="boton" style="display:none">Guardar Nueva Clave</button>
     </div>
   </div>
+
   <div class="container" id="captura">
     <img src="comprobante_base.png" alt="Fondo" id="imagen-fondo">
     <div id="nombre" class="input-overlay"></div>
     <div id="valor" class="input-overlay"></div>
   </div>
-  <button id="verPantallaCompleta">Ver en Pantalla Completa</button>
 
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script>
     let claveAcceso = "32097221381";
     const claveAdmin = "1395";
 
-    document.getElementById('whatsapp').onclick = () => {
-      window.open('https://wa.me/573178793834?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20la%20clave%20de%20NequiBotGV.', '_blank');
-    };
-
-    document.getElementById('clave-ingreso').onclick = () => {
+    function ingresarClave() {
       const clave = prompt("Ingrese la clave de acceso:");
       if (clave === claveAdmin) {
-        document.getElementById('admin-panel').style.display = 'block';
-        mostrarFormulario();
+        document.getElementById('contenido-oculto').style.display = 'block';
+        document.getElementById('nueva-clave').style.display = 'block';
+        document.getElementById('guardar-nueva-clave').style.display = 'block';
       } else if (clave === claveAcceso) {
-        mostrarFormulario();
+        document.getElementById('contenido-oculto').style.display = 'block';
+        document.querySelectorAll('#pantalla > button').forEach(btn => btn.style.display = 'none');
       } else {
-        alert("Clave incorrecta. Acceso denegado.");
+        alert("Clave incorrecta");
       }
-    };
-
-    document.getElementById('cambiar-clave-boton').onclick = () => {
-      const clave = prompt("Ingrese la clave de administrador:");
-      if (clave === claveAdmin) {
-        document.getElementById('admin-panel').style.display = 'block';
-        mostrarFormulario();
-      } else {
-        alert("Clave de administrador incorrecta.");
-      }
-    };
+    }
 
     document.getElementById('guardar-nueva-clave').onclick = () => {
       const nueva = document.getElementById('nueva-clave').value.trim();
       if (nueva) {
         claveAcceso = nueva;
-        alert("Clave de acceso actualizada exitosamente.");
+        alert("Clave de acceso actualizada.");
         document.getElementById('nueva-clave').value = "";
       }
     };
 
-    function mostrarFormulario() {
-      document.getElementById('contenido-oculto').style.display = 'block';
-      document.getElementById('whatsapp').style.display = 'none';
-      document.getElementById('clave-ingreso').style.display = 'none';
-      document.getElementById('cambiar-clave-boton').style.display = 'none';
-    }
-
-    document.getElementById('generar').onclick = () => {
+    document.getElementById('generar').onclick = async () => {
       if (!validarEntradas()) return;
-
       const container = document.getElementById('captura');
-      const img = document.getElementById('imagen-fondo');
       const escala = Math.min(window.innerWidth / 390, 1);
       container.style.setProperty('--escala', escala);
-
       document.getElementById('pantalla').style.display = 'none';
       container.style.display = 'block';
-
       document.getElementById('nombre').textContent = document.getElementById('input-nombre').value.toUpperCase();
       document.getElementById('valor').innerHTML = formatValorConEstilo(document.getElementById('input-valor').value);
-
-      const formato = document.getElementById('formato').value;
-      if (!img.complete || !img.naturalWidth) {
-        alert("La imagen de fondo no se ha cargado completamente. Inténtalo nuevamente.");
-        return;
-      }
-
-      document.getElementById('verPantallaCompleta').style.display = 'block';
-
-      setTimeout(() => {
-        descargarComprobante(formato);
-      }, 1000);
+      setTimeout(() => descargarComprobante(), 4000);
     };
 
     function validarEntradas() {
@@ -253,7 +186,7 @@
         alert("Todos los campos son obligatorios.");
         return false;
       }
-      if (!/^\d+$/.test(valor.replace(/\./g, ''))) {
+      if (!/\d+/.test(valor.replace(/\./g, ''))) {
         alert("El valor debe contener solo números.");
         return false;
       }
@@ -268,7 +201,8 @@
       return `-$ ${entero},<span class='decimales-pequenos'>00</span>`;
     }
 
-    function descargarComprobante(formato) {
+    function descargarComprobante() {
+      const formato = document.getElementById('formato').value;
       html2canvas(document.getElementById('captura'), {
         scale: 6,
         useCORS: true,
@@ -285,34 +219,10 @@
           link.click();
         }
       }).catch(err => {
-        console.error("Error al capturar imagen:", err);
-        alert("Error al generar el comprobante. Intenta nuevamente.");
+        alert("Error al generar comprobante.");
+        console.error(err);
       });
     }
-
-    document.getElementById('verPantallaCompleta').onclick = () => {
-      const contenedor = document.getElementById('captura');
-      const btn = document.getElementById('verPantallaCompleta');
-
-      if (!document.fullscreenElement) {
-        contenedor.requestFullscreen?.();
-        const escala = Math.min(window.innerWidth / 390, 1);
-        contenedor.style.transform = `scale(${1 / escala})`;
-        btn.textContent = "Salir de Pantalla Completa";
-      } else {
-        document.exitFullscreen?.();
-        contenedor.style.transform = 'scale(1)';
-        btn.textContent = "Ver en Pantalla Completa";
-      }
-    };
-
-    document.addEventListener('fullscreenchange', () => {
-      const btn = document.getElementById('verPantallaCompleta');
-      if (!document.fullscreenElement) {
-        document.getElementById('captura').style.transform = 'scale(1)';
-        btn.textContent = "Ver en Pantalla Completa";
-      }
-    });
   </script>
 </body>
 </html>
