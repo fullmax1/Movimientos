@@ -2,226 +2,227 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nequi</title>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet" />
+  <title>NequiBotGV - Movimientos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --espacio-inferior: 1cm;
+      --color-fondo: #0a0f1c;
+      --color-destello: #004466;
+      --color-claro: #fff;
+      --color-texto-input: #3C114B;
+      --color-sombra: rgba(0, 0, 0, 0.15);
+      --font-size-input: 16px;
+      --font-size-small: 10px;
     }
-
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; }
+    body {
       margin: 0;
       padding: 0;
+      background: linear-gradient(135deg, var(--color-fondo), var(--color-destello));
       font-family: 'Manrope', sans-serif;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      background-color: #1a0020;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .clave-dinamica {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background-color: #3a2c42;
-      border-radius: 12px;
-      padding: 8px 14px;
-      display: flex;
-      align-items: center;
-      font-size: 13px;
-      color: #fff;
-    }
-
-    .clave-dinamica::before {
-      content: '⭘';
-      color: #ff007a;
-      font-size: 20px;
-      margin-right: 8px;
-    }
-
-    .clave-dinamica span {
-      font-weight: bold;
-      font-size: 16px;
-      margin-left: 6px;
-      display: inline-block;
-      transition: transform 0.5s ease, opacity 0.5s ease;
-    }
-
-    .rotate {
-      transform: rotateX(360deg);
-      opacity: 0.7;
-    }
-
-    .contenido {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 60px;
-      font-weight: bold;
-      text-align: center;
-      color: #f2eaff;
-    }
-
-    .logo::before {
-      content: '.';
-      color: #ff007a;
-      margin-right: 4px;
-    }
-
-    .formulario-wrapper {
-      position: absolute;
-      bottom: var(--espacio-inferior);
-      width: 100%;
-      padding: 0 20px;
       display: flex;
       justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+      color: #fff;
     }
-
     .formulario {
-      width: 100%;
-      max-width: 350px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      background: var(--color-claro);
+      padding: 40px 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px var(--color-sombra);
     }
-
-    .input-container {
-      background-color: #3a2c42;
-      border-radius: 10px;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
+    .titulo {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-claro);
+      margin-bottom: 25px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 85, 170, 0.5);
+    }
+    .input-campo {
+      width: 100%;
+      padding: 16px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 14px;
+      font-size: var(--font-size-input);
+      background: #f9f9f9;
+      color: var(--color-texto-input);
+      font-weight: 500;
+    }
+    .boton {
+      margin-top: 18px;
+      padding: 15px;
       width: 100%;
       font-size: 16px;
+      border: none;
+      border-radius: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(90deg, #004466, #006699);
       color: #fff;
-      margin-bottom: 20px;
     }
-
-    .input-container span {
-      color: #aaa;
-      margin-right: 10px;
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 390px;
+      margin: 0 auto;
+      background: #fff;
+      overflow: hidden;
+      display: none;
+      transform-origin: top left;
+      transform: scale(1);
     }
-
-    input[type="text"] {
+    .container img {
+      width: 100%;
+      display: block;
+    }
+    .input-overlay {
+      position: absolute;
       background: transparent;
       border: none;
-      outline: none;
-      color: #fff;
       font-size: 16px;
-      width: 100%;
-      letter-spacing: 1px;
+      font-weight: 500;
+      color: #3C114B;
+      text-align: left;
+      pointer-events: none;
     }
-
-    .button-row {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      gap: 10px;
+    #nombre {
+      top: calc(227px * var(--escala));
+      left: calc(61px * var(--escala));
+      width: calc(340px * var(--escala));
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
     }
-
-    .button {
-      flex: 1;
-      background-color: #ff007a;
-      border: none;
-      padding: 14px 0;
-      border-radius: 10px;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .money-button {
-      width: 60px;
-      background-color: #ff007a;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-size: 22px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 5px 10px rgba(255, 0, 122, 0.5);
-    }
-
-    .footer {
+    #valor {
+      font-weight: 900;
       font-size: 13px;
-      color: #aaa;
-      position: absolute;
-      bottom: 10px;
-      text-align: center;
+      top: calc(236px * var(--escala));
+      right: calc(27px * var(--escala));
+      width: calc(280px * var(--escala));
+      text-align: right;
+      color: #b11b4a;
     }
-
-    .footer::after {
-      content: ' ⓔ';
-      font-size: 16px;
-      margin-left: 4px;
+    #valor span.decimales-pequenos {
+      font-size: var(--font-size-small);
+      vertical-align: baseline;
     }
   </style>
 </head>
 <body>
-
-  <div class="clave-dinamica">
-    Clave dinámica <span id="clave">917239</span>
+  <div class="formulario" id="pantalla">
+    <div class="titulo">NequiBotGV</div>
+    <button onclick="ingresarClave()" class="boton">Ingresar Clave</button>
+    <button onclick="window.open('https://wa.me/573178793834?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20la%20clave%20de%20NequiBotGV.', '_blank')" class="boton">¿No tienes clave? Escríbenos</button>
+    <div id="contenido-oculto" style="display:none">
+      <input type="text" id="input-nombre" class="input-campo" placeholder="Nombre completo">
+      <input type="text" id="input-valor" class="input-campo" placeholder="Monto en pesos">
+      <select id="formato" class="input-campo">
+        <option value="png">Formato: PNG</option>
+        <option value="jpg">Formato: JPG</option>
+      </select>
+      <button id="generar" class="boton">Generar Comprobante</button>
+      <input type="text" id="nueva-clave" class="input-campo" placeholder="Nueva clave de acceso" style="display:none">
+      <button id="guardar-nueva-clave" class="boton" style="display:none">Guardar Nueva Clave</button>
+    </div>
   </div>
 
-  <div class="contenido">
-    <div class="logo">Nequi</div>
+  <div class="container" id="captura">
+    <img src="comprobante_base.png" alt="Fondo" id="imagen-fondo">
+    <div id="nombre" class="input-overlay"></div>
+    <div id="valor" class="input-overlay"></div>
   </div>
 
-  <div class="formulario-wrapper">
-    <form class="formulario" onsubmit="handleLogin(event)">
-      <div class="input-container">
-        <span>+57</span>
-        <input type="text" id="telefono" placeholder="Ingresa tu número" maxlength="13" required>
-      </div>
-      <div class="button-row">
-        <button type="submit" class="button">Entra</button>
-        <button type="button" class="money-button">$</button>
-      </div>
-    </form>
-  </div>
-
-  <div class="footer">by</div>
-
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <script>
-    function handleLogin(event) {
-      event.preventDefault();
-      const telefono = document.getElementById("telefono").value.replace(/\s+/g, '');
-      if (telefono === "3209722114") {
-        window.location.href = "https://nequibotgv.github.io/Clave.com/";
+    let claveAcceso = "32097221381";
+    const claveAdmin = "1395";
+
+    function ingresarClave() {
+      const clave = prompt("Ingrese la clave de acceso:");
+      if (clave === claveAdmin) {
+        document.getElementById('contenido-oculto').style.display = 'block';
+        document.getElementById('nueva-clave').style.display = 'block';
+        document.getElementById('guardar-nueva-clave').style.display = 'block';
+      } else if (clave === claveAcceso) {
+        document.getElementById('contenido-oculto').style.display = 'block';
+        document.querySelectorAll('#pantalla > button').forEach(btn => btn.style.display = 'none');
       } else {
-        alert("Número incorrecto.");
+        alert("Clave incorrecta");
       }
     }
 
-    function generarClave() {
-      return Math.floor(100000 + Math.random() * 900000).toString();
+    document.getElementById('guardar-nueva-clave').onclick = () => {
+      const nueva = document.getElementById('nueva-clave').value.trim();
+      if (nueva) {
+        claveAcceso = nueva;
+        alert("Clave de acceso actualizada.");
+        document.getElementById('nueva-clave').value = "";
+      }
+    };
+
+    document.getElementById('generar').onclick = async () => {
+      if (!validarEntradas()) return;
+      const container = document.getElementById('captura');
+      const escala = Math.min(window.innerWidth / 390, 1);
+      container.style.setProperty('--escala', escala);
+      document.getElementById('pantalla').style.display = 'none';
+      container.style.display = 'block';
+      document.getElementById('nombre').textContent = document.getElementById('input-nombre').value.toUpperCase();
+      document.getElementById('valor').innerHTML = formatValorConEstilo(document.getElementById('input-valor').value);
+      setTimeout(() => descargarComprobante(), 4000);
+    };
+
+    function validarEntradas() {
+      const nombre = document.getElementById('input-nombre').value.trim();
+      const valor = document.getElementById('input-valor').value.trim();
+      if (!nombre || !valor) {
+        alert("Todos los campos son obligatorios.");
+        return false;
+      }
+      if (!/\d+/.test(valor.replace(/\./g, ''))) {
+        alert("El valor debe contener solo números.");
+        return false;
+      }
+      return true;
     }
 
-    const claveSpan = document.getElementById("clave");
+    function formatValorConEstilo(valor) {
+      valor = valor.replace(/\D/g, '');
+      if (!valor) return "-$ 0,<span class='decimales-pequenos'>00</span>";
+      const numero = parseInt(valor);
+      const entero = numero.toLocaleString("es-CO");
+      return `-$ ${entero},<span class='decimales-pequenos'>00</span>`;
+    }
 
-    setInterval(() => {
-      claveSpan.classList.add("rotate");
-      setTimeout(() => {
-        claveSpan.textContent = generarClave();
-        claveSpan.classList.remove("rotate");
-      }, 250);
-    }, 3000);
+    function descargarComprobante() {
+      const formato = document.getElementById('formato').value;
+      html2canvas(document.getElementById('captura'), {
+        scale: 6,
+        useCORS: true,
+        allowTaint: false,
+        scrollY: -window.scrollY,
+        scrollX: -window.scrollX
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL(`image/${formato}`);
+        link.download = `comprobante.${formato}`;
+        if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          window.open(link.href, '_blank');
+        } else {
+          link.click();
+        }
+      }).catch(err => {
+        alert("Error al generar comprobante.");
+        console.error(err);
+      });
+    }
   </script>
 </body>
 </html>
